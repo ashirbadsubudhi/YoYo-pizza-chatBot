@@ -1,5 +1,7 @@
 # YoYo-pizza-chatBot
 A chat application which can help users with the Pizza Ordering for YoYo Pizza.
+App is deployed: https://agile-savannah-76351.herokuapp.com/
+
 ## **Setup**
 
 Cloning repository: `git clone https://github.com/ashirbadsubudhi/YoYo-pizza-chatBot/` 
