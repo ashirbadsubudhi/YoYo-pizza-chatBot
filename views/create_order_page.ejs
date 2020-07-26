@@ -114,7 +114,7 @@
             }
 
             function nextWorkAndValidatePincode(id1,id2,id3) {
-                if(document.getElementById(id1).value == "" || !(document.getElementById(id1).value.match(/^\d{7}$/))){
+                if(document.getElementById(id1).value == "" || !(document.getElementById(id1).value.match(/^\d{6}$/))){
                     window.alert("Please enter valid 6 digit Pincode!!");
                 }
                 else{
