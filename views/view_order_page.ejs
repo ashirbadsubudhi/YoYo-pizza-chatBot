@@ -1,0 +1,28 @@
+<html>
+    <head></head>
+    <body>
+        <h2>Your Order status</h2>
+        <p>Hi <%= details.customerName %>, your order placed. It will delivered soon!!</p>
+        <p>Your order details are:</p>
+        <p>Order ID: <%= details.orderId %></p>
+        <p><%= details.pizzaType %> Pizza
+            <% if (details.pizzaSize.length == 2) {%>
+                <p>Small Pizza : <%= details.quantity[0] %> Qty</p>
+                <p>Medium Pizza : <%= details.quantity[1] %> Qty</p>
+            <%} else {%>
+                <% if (details.quantity[0] > details.quantity[1]) {%>
+                    <p><%= details.pizzaSize[0] %> Pizza : <%= details.quantity[0] %> Qty</p>
+                <%} else {%>
+                    <p><%= details.pizzaSize[0] %> Pizza : <%= details.quantity[1] %> Qty</p>
+                <%}%>              
+            <%}%>    
+        </p>
+        <p>
+            <p>Address Details are:</p>
+            <p>City : <%= details.city %></p>
+            <p>Pincode : <%= details.pincode %></p>
+        </p>
+        <p>Total Order Amount : <%= details.totalAmount %></p>
+        <a href="/">Back</a>
+    </body>
+</html>

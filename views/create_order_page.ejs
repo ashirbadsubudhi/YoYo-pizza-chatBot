@@ -1,0 +1,164 @@
+<html>
+    <head></head>
+    <body>
+        <h1>New Order Page!!</h1>
+        <h2>Welcome to YoYo Pizza!!</h2>
+        <form action="/orders/create/" method="POST">
+            <div id="phoneNumberDiv">
+                <label for="phoneNumber">Please enter your Phone Number:</label></br>
+                <textarea type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone number"></textarea></br>
+                <button type="button" id="b1" onclick="nextWorkAndValidatePhoneNumber('phoneNumber','phoneNumberDiv','pizzaTypeDiv')">confirm</button>
+            </div>
+
+            <div id="pizzaTypeDiv" style="display: none">
+                <p>What kind of Pizza you want?</p></br>
+                <input type="radio" id="Veg" name="pizzaType" value="Veg" checked><label>Veg Pizza</label></br>
+                <input type="radio" id="Non-Veg" name="pizzaType" value="Non-Veg"><label>Non-Veg Pizza</label></br>
+                <button type="button" id="b2" onclick="nextWork('pizzaTypeDiv','pizzaSizeDiv')">confirm</button>
+            </div>
+            
+            <div id="pizzaSizeDiv" style="display: none">
+                
+                <p>Which size you want?</p></br>
+                <input type="checkbox" id="small" name="pizzaSize" value="small" onchange="populate('quantity1','small')"><label>Small(Rs 100/-)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="quantity1" name="quantity" value="0" style="width: 20px;" readonly="readonly"/>
+                    <button type="button" onclick="increaseQty('quantity1','small')">+</button>&nbsp;<button type="button" onclick="decreaseQty('quantity1','small')">-</button></br>
+                <input type="checkbox" id="medium" name="pizzaSize" value="medium" onchange="populate('quantity2','medium')"><label>Medium(Rs 200/-)</label>&nbsp;
+                    <input type="text" id="quantity2" name="quantity" value="0"  style="width: 20px;" readonly="readonly"/>
+                    <button type="button" onclick="increaseQty('quantity2','medium')">+</button>&nbsp;<button type="button" onclick="decreaseQty('quantity2','medium')">-</button></br>
+                <!-- <textarea type="text" name="pizzaSize" id="pizzaSize" placeholder="Pizza Size"></textarea></br> -->
+                <button type="button" id="b3" onclick="nextWorkAndValidateQuantity('pizzaSizeDiv','customerNameDiv','small','medium')">confirm</button>
+            </div>
+            
+            <!-- <div id="quantityDiv" style="display: none">
+                <label for="quantity">Please enter the quantity of Pizza:</label></br>
+                <textarea type="text" name="quantity" id="quantity" placeholder="Quantity"></textarea></br>
+                <button type="button" id="b4" onclick="nextWork('quantityDiv','customerNameDiv')">confirm</button>
+            </div> -->
+            
+            <div id="customerNameDiv" style="display: none">
+                <label for="customerName">Please enter your Name:</label></br>
+                <textarea type="text" name="customerName" id="customerName" placeholder="Your Name"></textarea></br>
+                <button type="button" id="b4" onclick="nextWorkAndValidateString('customerName','customerNameDiv','cityDiv')">confirm</button>
+            </div>
+            
+            <div id="cityDiv" style="display: none">
+                <label for="city">Please enter your city:</label></br>
+                <textarea type="text" name="city" id="city" placeholder="Your city"></textarea></br>
+                <button type="button" id="b4" onclick="nextWorkAndValidateString('city','cityDiv','pincodeDiv')">confirm</button>
+            </div>
+            
+            <div id="pincodeDiv" style="display: none">
+                <label for="pincode">Please enter your pincode:</label></br>
+                <textarea type="text" name="pincode" id="pincode" placeholder="Your Pincode"></textarea></br>
+                <button type="button" id="b4" onclick="nextWorkAndValidatePincode('pincode','pincodeDiv','addressStreetDiv')">confirm</button>
+            </div>
+
+            <div id="addressStreetDiv" style="display: none">
+                <label for="addressStreet">Please enter your street address:</label></br>
+                <textarea type="text" name="addressStreet" id="addressStreet" placeholder="Your Street address"></textarea></br>
+                <!-- <button type="button" id="b4" onclick="nextWork('pincodeDiv','addressStreetDiv')">confirm</button> -->
+                <button type="submit">CONFIRM</button>
+            </div>
+
+            
+        </form>
+        <a href="/">Back</a>
+        <script>
+
+            function nextWorkAndValidateQuantity(id1,id2,id3,id4){
+                if(!document.getElementById(id3).checked && !document.getElementById(id4).checked){
+                    window.alert("Please select some option!!");
+                }else{
+                    document.getElementById(id1).style.display = "none";
+                    document.getElementById(id2).style.display = "block";
+                }
+
+            }
+
+            function increaseQty(id1,id2){
+                if(document.getElementById(id2).checked == false){
+                    window.alert("Please select the option!!");
+                }
+                else{
+                    let value = document.getElementById(id1).value;
+                    value = parseInt(value) + 1;
+                    document.getElementById(id1).value = value;
+                }
+                 
+            }
+
+            function decreaseQty(id1,id2){
+                if(document.getElementById(id2).checked == false){
+                    window.alert("Please select the option!!");
+                }else{
+                    if(document.getElementById(id1).value == 1){
+                        window.alert("Quantity can't be less than 1!!");
+                    }else{
+                        let value = document.getElementById(id1).value;
+                        value = parseInt(value) - 1;
+                        document.getElementById(id1).value = value;
+                    }
+                }
+            }
+
+            function populate(id1,id2){
+                if(document.getElementById(id2).checked == true){
+                    console.log(id2 + " : true");
+                    document.getElementById(id1).value = 1;
+                }
+                else{
+                    console.log(id2 + " : false");
+                    document.getElementById(id1).value = 0;
+                }
+            }
+
+            function nextWorkAndValidatePincode(id1,id2,id3) {
+                if(document.getElementById(id1).value == "" || !(document.getElementById(id1).value.match(/^\d{7}$/))){
+                    window.alert("Please enter valid Pincode!!");
+                }
+                else{
+                console.log( typeof(document.getElementById(id1).value));
+                document.getElementById(id2).style.display = "none";
+                // document.getElementById(id2).disabled = true;
+                // document.getElementById(id3).style.visibility = "hidden";
+                document.getElementById(id3).style.display = "block";
+                }
+            }
+
+            function nextWorkAndValidatePhoneNumber(id1,id2,id3) {
+                if(document.getElementById(id1).value == "" || !(document.getElementById(id1).value.match(/^\d{10}$/))){
+                    window.alert("Please enter valid Phone number!!");
+                }
+                else{
+                console.log( typeof(document.getElementById(id1).value));
+                document.getElementById(id2).style.display = "none";
+                // document.getElementById(id2).disabled = true;
+                // document.getElementById(id3).style.visibility = "hidden";
+                document.getElementById(id3).style.display = "block";
+                }
+            }
+            
+            function nextWorkAndValidateString(id1,id2,id3) {
+                if(document.getElementById(id1).value == "" ){
+                    window.alert("Please enter a value  !!");
+                }
+                else{
+                console.log( typeof(document.getElementById(id1).value));
+                document.getElementById(id2).style.display = "none";
+                // document.getElementById(id2).disabled = true;
+                // document.getElementById(id3).style.visibility = "hidden";
+                document.getElementById(id3).style.display = "block";
+                }
+            }
+
+            function nextWork(id1,id4) {
+                document.getElementById(id1).style.display = "none";
+                // document.getElementById(id2).disabled = true;
+                // document.getElementById(id3).style.visibility = "hidden";
+                document.getElementById(id4).style.display = "block";
+            }
+            </script>
+             
+    </body>
+</html>

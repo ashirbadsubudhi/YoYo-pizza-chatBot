@@ -1,0 +1,28 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Welcome to YoYo Pizza!!</h1>
+        <div id="div1">
+            <h3>Please choose from following options</h3>
+            <a href="/render/new-order">New order</a>
+            <a href="javascript:nextWork('div1','div2')">Order status</a>
+        </div>
+        <div id="div2" style="display: none">
+            <p>Please enter your order ID : </p>
+            <!-- <form action="/orders/search" method="GET"> -->
+                <input id = "input" type="number" name = "oid" style="width: 50px;"/><button onclick="search('input')">search</button>
+            <!-- </form> -->
+            <br/><a href="/">Back</a>
+        </div>
+
+        <script>function nextWork(id1,id2) {
+            document.getElementById(id1).style.display = "none";
+            document.getElementById(id2).style.display = "block";
+        }
+
+        function search(id){
+            window.location = '/orders/' + document.getElementById(id).value+'/';
+        }
+        </script>
+    </body>
+</html>
